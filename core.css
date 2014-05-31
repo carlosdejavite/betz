@@ -1,0 +1,226 @@
+/* Background */
+
+body {
+	font-family: Verdana;
+    font-size: 13px;
+    background:url('background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
+
+.overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0, 0, 0, 0.75);
+    z-index:-9999;
+}
+
+input {
+    padding: 5px;
+    width: 10px;
+    background: rgba(255,255,255,0.5);
+    margin: 0px;
+}
+
+/* Header */
+
+.header{
+	background-color: #333;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 70px;
+	z-index: 9999;
+}
+
+.logo{
+	margin-left: 15px;
+	margin-top:	10px;
+}
+
+.login{
+	float: right;
+	margin-top: 15px;
+	margin-right: 15px;
+	color: white;
+}
+
+.headerMenu li{
+	display: inline;
+	float: right;
+	margin-bottom: 30px;
+	padding-right: 5px;
+	padding-left: 5px;
+	margin-top: -15px;
+	border-left: 1px dotted #FFF;
+}
+
+.headerMenu li:first-child{
+	margin-right: 10px;
+}
+
+.headerMenu li:last-child{
+	border-left: none;
+}
+
+#selectedHeaderMenu{
+	color: #ccc;
+}
+
+.headerMenu a {
+	font-style: italic;
+	color: white;
+}
+
+/* Cointainer */
+
+.container{
+	position: relative;
+	text-align: center;
+	top: 80px;
+}
+
+.groupTitle{
+	font-size: 20px;
+	margin-bottom: 2px;
+	margin-left: 15px;
+	margin-top: 5px;
+	text-align: left;
+}
+
+@media screen and (min-width:1040px) {
+	.group{
+		position: relative;
+		display: inline-block;
+		width: 1040px;
+		background-color:rgba(255, 255, 255, 1);
+		margin-bottom: 15px;
+	}
+
+	.classification{
+		display: inline-block;
+		vertical-align: middle;
+		margin-bottom: 15px;
+	}
+
+	.games{
+		display: inline-block;
+		vertical-align: top;
+		width: 690px;
+	}
+}
+@media screen and (max-width:1039px) {
+	.group{
+		position: relative;
+		display: inline-block;
+		background-color:rgba(255, 255, 255, 1);
+		margin-bottom: 15px;
+	}
+
+	.classification{
+		display: inline;
+		margin-bottom: 15px;
+	}
+
+	.games{
+		vertical-align: top;
+	}
+}
+
+.games ul{
+	margin-top: -5px;
+}
+
+ul{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+.games li{
+	display: inline-block;
+	margin: 15px;
+}
+
+.teamName{
+	color: #999;
+	width: 75px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 7px;
+}
+
+.games li input{
+	margin-top: 2px;
+}
+
+.leftTeam{
+	float: left;
+}
+
+.rightTeam{
+	float: right;
+}
+
+.middleX{
+	vertical-align: -webkit-baseline-middle;
+	margin-top: 5px;
+	margin-right: 20px;
+	margin-left: 20px;
+	font-family: "Raleway Dots";
+	font-size: 18px;
+}
+
+/* Table */
+table{
+	margin: auto;
+	width: 310px;
+}
+tbody td{
+	padding: 10px;
+	color: #CCC;
+	border-bottom: 1px dotted #E7E7E7;
+}
+
+thead td{
+	padding: 5px;
+	font-size: 10px;
+	color: #999;
+	border-bottom: 1px solid #CCC;
+	border-top: 1px solid #CCC;
+	text-align: center;
+}
+
+.oddColumn{
+	background-color: #F3F3F3;
+}
+
+.classified{
+	font-weight: bold;
+	color: green;
+	text-align: left;
+	padding-left: 2px;
+}
+.notClassified{
+	font-weight: bold;
+	color: #CCC;
+	text-align: left;
+	padding-left: 2px;
+}
+
+.mainInfo{
+	color: black;
+	font-weight: bold;
+}
+
+tbody tr:hover td{
+	background-color: #F3F3F3;
+	color: black;
+}
