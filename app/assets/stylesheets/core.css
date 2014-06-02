@@ -1,0 +1,337 @@
+/* Background */
+
+body {
+	font-family: Helvetica;
+    font-size: 14px;
+    background:url('background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
+
+.overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0, 0, 0, 0.75);
+    z-index:-9999;
+}
+
+/* Login&Forms */
+
+.button {
+	-moz-box-shadow: 0px 1px 0px 0px #fff6af;
+	-webkit-box-shadow: 0px 1px 0px 0px #fff6af;
+	box-shadow: 0px 1px 0px 0px #fff6af;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ff9d00));
+	background:-moz-linear-gradient(top, #ffec64 5%, #ff9d00 100%);
+	background:-webkit-linear-gradient(top, #ffec64 5%, #ff9d00 100%);
+	background:-o-linear-gradient(top, #ffec64 5%, #ff9d00 100%);
+	background:-ms-linear-gradient(top, #ffec64 5%, #ff9d00 100%);
+	background:linear-gradient(to bottom, #ffec64 5%, #ff9d00 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ff9d00',GradientType=0);
+	background-color:#ffec64;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:block;
+	cursor:pointer;
+	color:#333333;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+	width: 214px;
+}
+
+.button:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ff9d00), color-stop(1, #ffec64));
+	background:-moz-linear-gradient(top, #ff9d00 5%, #ffec64 100%);
+	background:-webkit-linear-gradient(top, #ff9d00 5%, #ffec64 100%);
+	background:-o-linear-gradient(top, #ff9d00 5%, #ffec64 100%);
+	background:-ms-linear-gradient(top, #ff9d00 5%, #ffec64 100%);
+	background:linear-gradient(to bottom, #ff9d00 5%, #ffec64 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9d00', endColorstr='#ffec64',GradientType=0);
+	background-color:#ff9d00;
+}
+
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+.loginGroup{
+	position: relative;
+	display: inline-block;
+	border-radius: 5px;
+	background-color:rgba(255, 255, 255, 1);
+	margin-bottom: 15px;
+	width: 300px;
+}
+
+.loginTitle{
+	background-color: #eee;
+	border-bottom: 1px solid #ccc;
+	color: #666;
+	font-size: 24px;
+	padding: 15px;
+	text-align: left;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+form{
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 30px;
+}
+
+label:first-of-type{
+	margin-top: 25px;
+}
+
+input[type = "text"],input[type = "password"]{
+	box-shadow: inset 0 1px 0 #ccc;
+	display: block;
+    vertical-align: middle;
+	padding: 4px 6px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ccc;
+    margin-bottom: 25px;
+    width: 200px;
+    height: 20px;
+    background: rgba(255,255,255,0.5);
+    color: #666;
+    border-radius: 5px;
+}
+
+label{
+	display: block;
+	margin-bottom: 5px;
+	text-align: left;
+	color: #888;
+}
+.registerUser{
+	float: left;
+	font-size: 11px;
+	color: #2989f4;
+	font-style: italic;
+}
+.error{
+	font-size: 12px;
+	color: red;
+	font-style: italic;
+	text-align: left;
+}
+
+/* Header */
+
+.header{
+	background-color: #333;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 70px;
+	z-index: 9999;
+}
+
+.logo{
+	margin-left: 15px;
+	margin-top:	10px;
+}
+
+.login{
+	float: right;
+	margin-top: 15px;
+	margin-right: 15px;
+	color: white;
+}
+
+.headerMenu li{
+	display: inline;
+	float: right;
+	margin-bottom: 30px;
+	padding-right: 5px;
+	padding-left: 5px;
+	margin-top: -15px;
+	border-left: 1px dotted #FFF;
+}
+
+.headerMenu li:first-child{
+	margin-right: 10px;
+}
+
+.headerMenu li:last-child{
+	border-left: none;
+}
+
+#selectedHeaderMenu{
+	color: #ccc;
+}
+
+.headerMenu a {
+	font-style: italic;
+	color: white;
+}
+
+/* Cointainer */
+
+.container{
+	position: relative;
+	text-align: center;
+	top: 80px;
+}
+
+.groupTitle{
+	font-size: 20px;
+	padding-bottom: 2px;
+	padding-left: 15px;
+	padding-top: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	text-align: left;
+}
+
+@media screen and (min-width:1040px) {
+	.group{
+		position: relative;
+		display: inline-block;
+		border-radius: 5px;
+		width: 1040px;
+		background-color:rgba(255, 255, 255, 1);
+		margin-bottom: 15px;
+	}
+
+	.classification{
+		display: inline-block;
+		vertical-align: middle;
+		margin-bottom: 15px;
+	}
+
+	.games{
+		display: inline-block;
+		vertical-align: top;
+		width: 690px;
+	}
+}
+@media screen and (max-width:1039px) {
+	.group{
+		position: relative;
+		display: inline-block;
+		border-radius: 5px;
+		background-color:rgba(255, 255, 255, 1);
+		margin-bottom: 15px;
+	}
+
+	.classification{
+		display: inline;
+		margin-bottom: 15px;
+	}
+
+	.games{
+		vertical-align: top;
+	}
+}
+
+.games ul{
+	margin-top: -5px;
+}
+
+ul{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+.games li{
+	display: inline-block;
+	margin: 15px;
+}
+
+.teamName{
+	color: #999;
+	width: 75px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 7px;
+}
+
+.games li input{
+	padding: 5px;
+    width: 10px;
+    background: rgba(255,255,255,0.5);
+    margin: 0px;
+	margin-top: 2px;
+}
+
+.leftTeam{
+	float: left;
+}
+
+.rightTeam{
+	float: right;
+}
+
+.middleX{
+	vertical-align: -webkit-baseline-middle;
+	margin-top: 5px;
+	margin-right: 20px;
+	margin-left: 20px;
+	font-family: "Raleway Dots";
+	font-size: 18px;
+}
+
+/* Table */
+table{
+	margin: auto;
+	width: 310px;
+}
+tbody td{
+	padding: 10px;
+	color: #CCC;
+	border-bottom: 1px dotted #E7E7E7;
+}
+
+thead td{
+	padding: 5px;
+	font-size: 10px;
+	color: #999;
+	border-bottom: 1px solid #CCC;
+	border-top: 1px solid #CCC;
+	text-align: center;
+}
+
+.oddColumn{
+	background-color: #F3F3F3;
+}
+
+.classified{
+	font-weight: bold;
+	color: green;
+	text-align: left;
+	padding-left: 2px;
+}
+.notClassified{
+	font-weight: bold;
+	color: #CCC;
+	text-align: left;
+	padding-left: 2px;
+}
+
+.mainInfo{
+	color: black;
+	font-weight: bold;
+}
+
+tbody tr:hover td{
+	background-color: #F3F3F3;
+	color: black;
+}

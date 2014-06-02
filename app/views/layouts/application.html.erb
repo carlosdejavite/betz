@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Betz</title>
+  <%= stylesheet_link_tag "core", media: "all" %>
+  <link href="https://fonts.googleapis.com/css?family=Raleway+Dots:400" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="overlay"></div>
+    <div class="header">
+        <a href="/"><%= image_tag("logo.png", :class => "logo", :alt => "Betz") %></a>
+        <% if @current_user != nil %>
+	        <span class="login">Hi <%=@current_user.name %>,</span>
+	        <ul class="headerMenu">
+	            <li><%= link_to 'Logout', users_logout_path %></li>
+	            <li><a href="#">Results</a></li>
+	            <li><a id="selectedHeaderMenu" href="#">Bets</a></li>
+	            <li><a href="#">Ranking</a></li>
+	        </ul>
+	    <% end %>
+    </div>
+
+<%= yield %>
+
+</body>
+</html>

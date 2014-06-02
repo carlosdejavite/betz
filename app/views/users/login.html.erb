@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="loginGroup">
+        <div class="loginTitle">Login</div>
+        <%= form_tag("/users/post_login", method: "post") do %>
+	        <%= label_tag(:login, "Login") %>
+	        <%= text_field_tag(:login) %>
+	        <%= label_tag(:password, "Password") %>
+	        <%= password_field_tag(:password) %>
+	        <%= submit_tag("Login", :class => "button") %>
+	        <% if flash[:error] == true %>
+	          <p class="error"><%= flash[:notice] %></p>
+	        <% end %> 
+	        <%= link_to 'Register user', new_user_path, :class => "registerUser" %>
+	    <% end %>
+	</div>
+</div>

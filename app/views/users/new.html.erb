@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="loginGroup">
+        <div class="loginTitle">Register user</div>
+        <%= form_for [@user] do |form| %>
+
+          <%= label_tag(:email, "Email*") %>
+          <%= form.text_field(:email) %>
+
+          <%= label_tag(:name, "Name*") %>
+          <%= form.text_field(:name) %>
+
+          <%= label_tag(:password, "Password*") %>
+          <%= form.password_field(:password) %>
+
+          <%= label_tag(:password_copy, "Re-type your password*") %>
+          <%= password_field_tag(:password_copy) %>
+
+          <%= form.submit "Register", :class => "button" %>
+
+          <% if @user.errors.any? %>
+            <ul class="error">
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          <% end %> 
+
+        <% end %>
+	</div>
+</div>
