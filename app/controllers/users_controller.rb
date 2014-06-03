@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   #define home
   def index
     if @current_user != nil then
-      @tournament = BettingPool.find_by(:user_id => @current_user.id).tournament
-      redirect_to :action => 'show', :id => @tournament.id
+      @betting_pool = BettingPool.find_by(:user_id => @current_user.id)
+      redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
     else
       redirect_to :controller => 'users', :action => 'login' 
     end
@@ -23,8 +23,8 @@ class UsersController < ApplicationController
    
     if @user != nil && @user.password_valid?(params[:password]) then
     	session[:user_id] = @user.id
-      @tournament = BettingPool.find_by(:user_id => @user.id).tournament
-    	redirect_to :action => 'show', :id => @tournament.id
+      @betting_pool = BettingPool.find_by(:user_id => @current_user.id)
+      redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
     else
     	flash[:error] = true
     	flash[:notice] = "Email and password doesn't match!"
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
           @user.errors.add(:password, " don't match!")
         end
         
-        if params[:user][:password] == params[:password_copy] && @user.save 
+        if params[:user][:password] == params[:password_copy] && @user.save
           flash[:notice] = "Successfully registered user"  
           redirect_to :controller => "users", :action => 'login'
         else  

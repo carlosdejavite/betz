@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140602053635) do
 
   create_table "bets", force: true do |t|
     t.integer  "match_id"
-    t.integer  "user_id"
+    t.integer  "betting_pool_id"
     t.integer  "score_a"
     t.integer  "score_b"
     t.datetime "created_at"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140602053635) do
 
   create_table "teams", force: true do |t|
     t.string   "name"
+    t.string   "abbreviation"
     t.string   "flag_filename"
     t.datetime "created_at"
     t.datetime "updated_at"

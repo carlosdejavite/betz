@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
 	include ActiveModel::Validations
 			
 	has_many 	:tournaments, :class_name => "Tournament", :foreign_key => "admin_tournament_id"
+	has_many	:tournaments, :through => :betting_pools
 	has_many	:betting_pools
-	has_many	:bets
+
 	validates 	:name, presence: true, allow_blank: false
 	validates 	:password, presence: true, allow_blank: false
 	validates 	:email, presence: true, email: true

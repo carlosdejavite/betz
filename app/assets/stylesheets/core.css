@@ -118,6 +118,32 @@ label{
 	text-align: left;
 	color: #888;
 }
+
+select{
+	float: left;
+    height: 28px;
+    margin: 15px;
+    margin-top: 5px;
+    line-height: 28px;
+    border: 1px solid #aaa;
+    padding: 4px;
+    color: #555;
+ }
+
+.finalistsButton{
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
+
+.finalists{
+	float: left;
+	text-align: left;
+	padding: 15px;
+    padding-top: 10px;
+    width: 100px;
+	color: #888;
+}
+
 .registerUser{
 	float: left;
 	font-size: 11px;
@@ -127,6 +153,14 @@ label{
 .error{
 	font-size: 12px;
 	color: red;
+	font-style: italic;
+	text-align: left;
+	padding-bottom: 5px;
+}
+
+.success{
+	font-size: 12px;
+	color: green;
 	font-style: italic;
 	text-align: left;
 }
@@ -242,7 +276,7 @@ label{
 }
 
 .games ul{
-	margin-top: -5px;
+	margin-top: -10px;
 }
 
 ul{
@@ -253,7 +287,7 @@ ul{
 
 .games li{
 	display: inline-block;
-	margin: 15px;
+	margin: 10px;
 }
 
 .teamName{
@@ -261,12 +295,13 @@ ul{
 	width: 75px;
 	font-weight: bold;
 	text-align: center;
-	margin-top: 7px;
+	margin-top: 9px;
 }
 
 .games li input{
 	padding: 5px;
-    width: 10px;
+    width: 15px;
+    text-align: center;
     background: rgba(255,255,255,0.5);
     margin: 0px;
 	margin-top: 2px;
@@ -282,11 +317,20 @@ ul{
 
 .middleX{
 	vertical-align: -webkit-baseline-middle;
-	margin-top: 5px;
+	margin-top: 7px;
 	margin-right: 20px;
 	margin-left: 20px;
 	font-family: "Raleway Dots";
 	font-size: 18px;
+}
+.time{
+	padding: 0px;
+	margin: 0px;
+	font-size: 10px;
+	font-style: italic;
+	color: #999;
+	display: block;
+	text-align: left;
 }
 
 /* Table */
@@ -307,6 +351,10 @@ thead td{
 	border-bottom: 1px solid #CCC;
 	border-top: 1px solid #CCC;
 	text-align: center;
+}
+
+thead td:first-child{
+	text-align: left;
 }
 
 .oddColumn{

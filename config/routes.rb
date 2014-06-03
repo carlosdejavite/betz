@@ -62,13 +62,5 @@ Betz::Application.routes.draw do
 
   resources :betting_pools
   resources :users
-  
-  resources :tournaments do
-    resources :groups do
-      resources :matches do
-        resources :bets
-      end
-    end
-  end
 
 end

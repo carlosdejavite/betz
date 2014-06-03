@@ -1,0 +1,65 @@
+<div class="container">
+  <%= form_for @betting_pool do |form| %>
+    <div class="group">
+        <div class="groupTitle">World-Cup Finalists</div>
+        <span class="finalists">WINNER</span>
+        <%= form.collection_select :winner_id, Team.find(:all), :id, :name, :prompt => "Select a team" %>
+        <span class="finalists">RUNNER-UP</span>
+        <%= form.collection_select :runnerup_id, Team.find(:all), :id, :name, :prompt => "Select a team" %>
+        <%= form.submit "Update bets", :class => "button finalistsButton" %>
+        <span class= <% if flash[:error] == true %> "error" <% else %> "success" <% end %> ><%= flash[:notice] %></span>
+    </div>
+    <% @tournament.groups.each do |group| %>
+      <div class="group">
+          <div class="groupTitle"><%= group.name %></div>
+          <div class="classification">
+              <table cellspacing="0">
+                <thead>
+                    <tr>
+                      <td>Classification</td>
+                      <td title="Points">Pts</td>
+                      <td title="Matches played">MP</td>
+                      <td title="Victories">V</td>
+                      <td title="Draws">D</td>
+                      <td title="Goal difference">GD</td>
+                      <td title="Goals for">GF</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% group.classification(@betting_pool.id).each_with_index do |rank,index| %>
+                      <tr>
+                        <td class= <% if rank.classified %> "classified" <% else %> "notClassified" <%end%> ><%= index + 1 %>. <%= rank.team.name %></td>
+                        <td class="oddColumn mainInfo"><%= rank.points %></td>
+                        <td><%= rank.matches_played %></td>
+                        <td class="oddColumn"><%= rank.victories %></td>
+                        <td><%= rank.draws %></td>
+                        <td class= "oddColumn"><%= rank.goal_difference %></td>
+                        <td><%= rank.goal_for %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+              </table>
+          </div>
+          <div class="games">
+              <ul>
+                <% group.matches.each do |match| %>
+                  <%= form.fields_for :bets, @bets.find_or_create_by(:match_id => match.id) do |bet_form| %>
+                    <li>
+                      <span class="time"><%= match.date_time.getlocal.strftime("%a %d %b %y %H:%M %p") %></span>
+                      <%= bet_form.hidden_field :match_id, :value => match.id %>
+                      <%= image_tag "#{@tournament.name}/#{match.team_a.flag_filename}", :alt => "#{match.team_a.name}", :class => "leftTeam" %>
+                      <span class="leftTeam teamName"> <%= match.team_a.abbreviation %> </span>
+                      <%= bet_form.text_field :score_a, :class => "leftTeam" %>
+                      <span class="middleX leftTeam">X</span>
+                      <%= image_tag "#{@tournament.name}/#{match.team_b.flag_filename}", :alt => "#{match.team_b.name}", :class => "rightTeam" %>
+                      <span class="rightTeam teamName"> <%= match.team_b.abbreviation %> </span>
+                      <%= bet_form.text_field :score_b, :class => "rightTeam" %>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+          </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
