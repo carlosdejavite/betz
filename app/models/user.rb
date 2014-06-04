@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
 	def password_valid?(password)
 		crypto_hash = Digest::SHA2.new(512)
-		if(password != nil && password_digest == crypto_hash.hexdigest(salt + password)) then
+		if(salt != nil && password != nil && password_digest == crypto_hash.hexdigest(salt + password)) then
 			return true
 		else
 			return false
