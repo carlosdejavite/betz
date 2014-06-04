@@ -175,3 +175,17 @@ function allowIntegersOnly(e){
         e.preventDefault();
     }
 }
+
+function collapse(id){
+	if($("#classification" + id).is(":visible")){
+		$("#classification" + id).hide();
+		$("#games" + id).hide();
+		$("#collapsor" + id).removeClass("not_collapsed");
+		$("#collapsor" + id).addClass("collapsed");
+	} else {
+		$("#classification" + id).show();
+		$("#games" + id).show();
+		$("#collapsor" + id).removeClass("collapsed");
+		$("#collapsor" + id).addClass("not_collapsed");
+	}
+}

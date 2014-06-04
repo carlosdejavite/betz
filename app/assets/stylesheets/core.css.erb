@@ -119,31 +119,6 @@ label{
 	color: #888;
 }
 
-select{
-	float: left;
-    height: 28px;
-    margin: 15px;
-    margin-top: 5px;
-    line-height: 28px;
-    border: 1px solid #aaa;
-    padding: 4px;
-    color: #555;
- }
-
-.finalistsButton{
-	margin-left: 15px;
-	margin-bottom: 15px;
-}
-
-.finalists{
-	float: left;
-	text-align: left;
-	padding: 15px;
-    padding-top: 10px;
-    width: 100px;
-	color: #888;
-}
-
 .registerUser{
 	float: left;
 	font-size: 11px;
@@ -216,7 +191,7 @@ select{
 	color: white;
 }
 
-/* Cointainer */
+/* Bets */
 
 .container{
 	position: relative;
@@ -232,6 +207,27 @@ select{
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	text-align: left;
+}
+
+.collapsed{
+	display: block;
+	background-image: url('<%= asset_path("plus_minus.png") %>');
+	background-repeat: no-repeat;
+	height: 20px;
+	width: 30px;
+	padding-left: 15px;
+	background-position: 0px 0px;
+}
+
+.not_collapsed{
+	display: block;
+	background-image: url('<%= asset_path("plus_minus.png") %>');
+	background-repeat: no-repeat;
+	height: 10px;
+	width: 30px;
+	padding-left: 15px;
+	background-position: 0px -19px;
+	margin-top: 5px;
 }
 
 @media screen and (min-width:1040px) {
@@ -275,6 +271,35 @@ select{
 	}
 }
 
+select:disabled{
+	background-color: #ccc;
+}
+
+select{
+	float: left;
+    height: 28px;
+    margin: 15px;
+    margin-top: 5px;
+    line-height: 28px;
+    border: 1px solid #aaa;
+    padding: 4px;
+    color: #555;
+ }
+
+.finalistsButton{
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
+
+.finalists{
+	float: left;
+	text-align: left;
+	padding: 15px;
+    padding-top: 10px;
+    width: 100px;
+	color: #888;
+}
+
 .games ul{
 	margin-top: -10px;
 }
@@ -305,6 +330,10 @@ ul{
     background: rgba(255,255,255,0.5);
     margin: 0px;
 	margin-top: 2px;
+}
+
+.games li input:disabled{
+	background-color: #ccc;
 }
 
 .leftTeam{

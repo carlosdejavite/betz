@@ -3,16 +3,16 @@
     <div class="group">
         <div class="groupTitle">World-Cup Finalists</div>
         <span class="finalists">WINNER</span>
-        <%= form.collection_select :winner_id, Team.find(:all), :id, :name, :prompt => "Select a team" %>
+        <%= form.collection_select(:winner_id, Team.find(:all), :id, :name, {:prompt => "Select a team"}, {:disabled => !@betting_pool.is_possible_change_winners }) %>
         <span class="finalists">RUNNER-UP</span>
-        <%= form.collection_select :runnerup_id, Team.find(:all), :id, :name, :prompt => "Select a team" %>
+        <%= form.collection_select(:runnerup_id, Team.find(:all), :id, :name,{:prompt => "Select a team"}, {:disabled => !@betting_pool.is_possible_change_winners }) %>
         <%= form.submit "Update bets", :class => "button finalistsButton" %>
         <span class= <% if flash[:error] == true %> "error" <% else %> "success" <% end %> ><%= flash[:notice] %></span>
     </div>
     <% @tournament.groups.each do |group| %>
       <div class="group">
-          <div class="groupTitle"><%= group.name %></div>
-          <div class="classification">
+          <div class="groupTitle"><%= group.name %><span id="collapsor<%= group.id %>" class="rightTeam not_collapsed" onclick="collapse(<%= group.id %>)"></span></div>
+          <div id="classification<%= group.id %>" class="classification">
               <table cellspacing="0">
                 <thead>
                     <tr>
@@ -40,20 +40,20 @@
                   </tbody>
               </table>
           </div>
-          <div class="games">
+          <div id="games<%= group.id %>" class="games">
               <ul>
                 <% group.matches.each do |match| %>
-                  <%= form.fields_for :bets, @bets.find_or_create_by(:match_id => match.id) do |bet_form| %>
+                  <%= form.fields_for :bets, @bets.find_or_initialize_by(:match_id => match.id) do |bet_form| %>
                     <li>
                       <span class="time"><%= match.date_time.getlocal.strftime("%a %d %b %y %H:%M %p") %></span>
                       <%= bet_form.hidden_field :match_id, :value => match.id %>
                       <%= image_tag "#{@tournament.name}/#{match.team_a.flag_filename}", :alt => "#{match.team_a.name}", :class => "leftTeam", :id => "match[#{group.id}][#{match.id}]" %>
                       <span class="leftTeam teamName"> <%= match.team_a.abbreviation %> </span>
-                      <%= bet_form.text_field :score_a, :class => "leftTeam" %>
+                      <%= bet_form.text_field :score_a, :class => "leftTeam", :disabled => !match.is_possible_bet_match %>
                       <span class="middleX leftTeam">X</span>
                       <%= image_tag "#{@tournament.name}/#{match.team_b.flag_filename}", :alt => "#{match.team_b.name}", :class => "rightTeam" %>
                       <span class="rightTeam teamName"> <%= match.team_b.abbreviation %> </span>
-                      <%= bet_form.text_field :score_b, :class => "rightTeam" %>
+                      <%= bet_form.text_field :score_b, :class => "rightTeam", :disabled => !match.is_possible_bet_match %>
                     </li>
                   <% end %>
                 <% end %>
