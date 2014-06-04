@@ -23,7 +23,7 @@ class UsersController < ApplicationController
    
     if @user != nil && @user.password_valid?(params[:password]) then
     	session[:user_id] = @user.id
-      @betting_pool = BettingPool.find_by(:user_id => @current_user.id)
+      @betting_pool = BettingPool.find_by(:user_id => @user.id)
       redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
     else
     	flash[:error] = true

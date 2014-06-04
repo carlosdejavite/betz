@@ -28,7 +28,7 @@
                   <tbody>
                     <% group.classification(@betting_pool.id).each_with_index do |rank,index| %>
                       <tr>
-                        <td class= <% if rank.classified %> "classified" <% else %> "notClassified" <%end%> ><%= index + 1 %>. <%= rank.team.name %></td>
+                        <td id="group[<%= group.id %>][<%= index %>]" class= <% if rank.classified %> "classified" <% else %> "notClassified" <%end%> ><%= index + 1 %>. <%= rank.team.name %></td>
                         <td class="oddColumn mainInfo"><%= rank.points %></td>
                         <td><%= rank.matches_played %></td>
                         <td class="oddColumn"><%= rank.victories %></td>
@@ -47,7 +47,7 @@
                     <li>
                       <span class="time"><%= match.date_time.getlocal.strftime("%a %d %b %y %H:%M %p") %></span>
                       <%= bet_form.hidden_field :match_id, :value => match.id %>
-                      <%= image_tag "#{@tournament.name}/#{match.team_a.flag_filename}", :alt => "#{match.team_a.name}", :class => "leftTeam" %>
+                      <%= image_tag "#{@tournament.name}/#{match.team_a.flag_filename}", :alt => "#{match.team_a.name}", :class => "leftTeam", :id => "match[#{group.id}][#{match.id}]" %>
                       <span class="leftTeam teamName"> <%= match.team_a.abbreviation %> </span>
                       <%= bet_form.text_field :score_a, :class => "leftTeam" %>
                       <span class="middleX leftTeam">X</span>
@@ -60,6 +60,13 @@
               </ul>
           </div>
       </div>
+      <script>
+          classification<%= group.id %> = new Classification("<%= group.id %>");
+          var input;
+          <% group.matches.each do |match| %>
+            classification<%= group.id %>.addMatch("<%= match.id %>");
+          <% end %>
+      </script>          
     <% end %>
   <% end %>
 </div>

@@ -23,8 +23,13 @@ class BettingPoolsController < ApplicationController
       bet.save
     end
 
-    @betting_pool.winner = Team.find(params[:betting_pool][:winner_id].to_i())
-    @betting_pool.runnerup = Team.find(params[:betting_pool][:runnerup_id].to_i())
+    if params[:betting_pool][:winner_id].to_i() != 0 then
+      @betting_pool.winner = Team.find(params[:betting_pool][:winner_id].to_i())
+    end
+
+    if params[:betting_pool][:runnerup_id].to_i() != 0 then
+      @betting_pool.runnerup = Team.find(params[:betting_pool][:runnerup_id].to_i())
+    end
 
     if @betting_pool.save then
       flash[:notice] = "Successfully saved bets"  
