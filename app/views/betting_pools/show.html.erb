@@ -2,9 +2,9 @@
   <div class="group">
     <div class="groupTitle">Bets of <%= @betting_pool.user.name %></div>
     <span class="finalists">WINNER</span>
-    <span class="finalists finalistSelection"> <%= @betting_pool.winner.name %> </span>
+    <span class="finalists finalistSelection"> <%= @betting_pool.winner != nil ? @betting_pool.winner.name : "NO BET" %> </span>
     <span class="finalists">RUNNER-UP</span>
-    <span class="finalists finalistSelection"> <%= @betting_pool.runnerup.name %> </span>
+    <span class="finalists finalistSelection"> <%= @betting_pool.runnerup != nil ? @betting_pool.runnerup.name : "NO BET" %> </span>
   </div>
   <% @tournament.groups.each do |group| %>
     <div class="group">

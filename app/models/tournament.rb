@@ -11,21 +11,21 @@ class Tournament < ActiveRecord::Base
 		betting_pools.each do |betting_pool|
 			betting_pool.points_won_in_bet = 0
 
-			if betting_pool.winner == winner
+			if betting_pool.winner == winner && betting_pool.winner != nil
 				betting_pool.points_won_in_bet += winner_point
 				betting_pool.points_won_in_bet += team_in_finals_point
 			end
 
-			if betting_pool.runnerup == runnerup
+			if betting_pool.runnerup == runnerup && betting_pool.runnerup != nil
 				betting_pool.points_won_in_bet += runnerup_point
 				betting_pool.points_won_in_bet += team_in_finals_point
 			end
 
-			if betting_pool.winner == runnerup
+			if betting_pool.winner == runnerup && betting_pool.winner != nil
 				betting_pool.points_won_in_bet += team_in_finals_point
 			end
 
-			if betting_pool.runnerup == winner
+			if betting_pool.runnerup == winner && betting_pool != nil
 				betting_pool.points_won_in_bet += team_in_finals_point
 			end
 
