@@ -28,9 +28,9 @@ class Match < ActiveRecord::Base
 				bet.points_won_in_bet += 2*group.bonus
 			end
 
-			//if bet.score_b == score_b
-			//	bet.points_won_in_bet += group.bonus
-			//end
+			#if bet.score_b == score_b
+			#	bet.points_won_in_bet += group.bonus
+			#end
 
 			bet.save(:validate => false)
 		end
