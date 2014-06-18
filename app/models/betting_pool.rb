@@ -3,6 +3,7 @@ class BettingPool < ActiveRecord::Base
 	belongs_to 	:runnerup, :class_name => "Team"
 	belongs_to 	:user
 	belongs_to  :tournament
+	belongs_to	:league
 	has_many	:bets
 	validate	:winner_different_from_runner_up
 

@@ -1,8 +1,10 @@
 class Group < ActiveRecord::Base
-	has_many	:matches
+	has_many	:matches, :order=>"date_time"
 	belongs_to 	:tournament
 
-	def classification(betting_pool_id)
+	accepts_nested_attributes_for :matches
+
+	def classification(betting_pool_id = nil)
 		@classification = Array.new
 
 		matches.each do |match|
@@ -10,7 +12,7 @@ class Group < ActiveRecord::Base
 			index = @classification.index do|rank| rank.team == match.team_a end
 			
 			if index == nil then
-				rank = Rank.new
+				rank = GroupRank.new
 				rank.team = match.team_a
 				rank.points = 0
 				rank.matches_played = 0
@@ -25,7 +27,7 @@ class Group < ActiveRecord::Base
 			index = @classification.index do|rank| rank.team == match.team_b end
 			
 			if index == nil then
-				rank = Rank.new
+				rank = GroupRank.new
 				rank.team = match.team_b
 				rank.points = 0
 				rank.matches_played = 0
@@ -37,7 +39,12 @@ class Group < ActiveRecord::Base
 				@classification << rank
 			end
 
-			game = Bet.find_by(:match_id => match.id, :betting_pool_id => betting_pool_id)
+			if betting_pool_id != nil then
+				game = Bet.find_by(:match_id => match.id, :betting_pool_id => betting_pool_id)
+			else
+				game = Match.find_by(:id => match.id)
+			end
+			
 			if game != nil && game.score_a != nil && game.score_b != nil then
 				
 				team_a_index = @classification.index do|rank| rank.team == match.team_a end

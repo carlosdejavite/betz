@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   #define home
   def index
     if @current_user != nil then
-      @betting_pool = BettingPool.find_by(:user_id => @current_user.id)
+      @betting_pool = BettingPool.find(session[:last_betting_pool_id])
       redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
     else
       redirect_to :controller => 'users', :action => 'login' 
@@ -13,7 +13,11 @@ class UsersController < ApplicationController
 
   #action to show login
   def login
-  	@title = "Login"
+    if @current_user != nil then
+      @betting_pool = BettingPool.find(session[:last_betting_pool_id])
+      redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
+    end
+    @title = "Login"
   end
 
   #action that checks login
@@ -24,6 +28,7 @@ class UsersController < ApplicationController
     if @user != nil && @user.password_valid?(params[:password]) then
     	session[:user_id] = @user.id
       @betting_pool = BettingPool.find_by(:user_id => @user.id)
+      session[:last_betting_pool_id] = @betting_pool.id
       redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
     else
     	flash[:error] = true

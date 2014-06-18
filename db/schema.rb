@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611123445) do
+ActiveRecord::Schema.define(version: 20140618003646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140611123445) do
     t.integer  "score_b"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "points_won_in_bet"
   end
 
   create_table "betting_pools", force: true do |t|
@@ -33,6 +34,8 @@ ActiveRecord::Schema.define(version: 20140611123445) do
     t.float    "bet_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "points_won_in_bet"
+    t.integer  "league_id"
   end
 
   create_table "groups", force: true do |t|
@@ -44,13 +47,22 @@ ActiveRecord::Schema.define(version: 20140611123445) do
     t.datetime "updated_at"
   end
 
+  create_table "leagues", force: true do |t|
+    t.string   "name"
+    t.float    "first_place_prize"
+    t.float    "second_place_prize"
+    t.float    "third_place_prize"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "matches", force: true do |t|
     t.datetime "date_time"
     t.integer  "group_id"
     t.integer  "team_a_id"
-    t.integer  "score_team_a"
+    t.integer  "score_a"
     t.integer  "team_b_id"
-    t.integer  "score_team_b"
+    t.integer  "score_b"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,6 +83,8 @@ ActiveRecord::Schema.define(version: 20140611123445) do
     t.integer  "team_in_finals_point"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "winner_id"
+    t.integer  "runnerup_id"
   end
 
   create_table "users", force: true do |t|

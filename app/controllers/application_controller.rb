@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     	@current_user ||= session[:user_id] && User.find(session[:user_id])
+    	@betting_pool ||= session[:last_betting_pool_id] && BettingPool.find(session[:last_betting_pool_id])
   end
+
+  
 
 end

@@ -14,9 +14,9 @@
 	        <span class="login">Hi <%=@current_user.name %>,</span>
 	        <ul class="headerMenu">
 	            <li><%= link_to 'Logout', users_logout_path %></li>
-	            <li><a href="#">Results</a></li>
-	            <li><a id="selectedHeaderMenu" href="#">Bets</a></li>
-	            <li><a href="#">Ranking</a></li>
+	            <li><%= link_to 'Results', edit_tournament_path(@betting_pool.tournament_id), id: controller?("tournaments") ? "selectedHeaderMenu" : nil  %></li>
+	            <li><%= link_to 'Bets', edit_betting_pool_path(@betting_pool.id), id: controller?("betting_pools") ? "selectedHeaderMenu" : nil %></li>
+	            <li><%= link_to 'Ranking', league_path(@betting_pool.league_id), id: controller?("leagues") ? "selectedHeaderMenu" : nil %></li>
 	        </ul>
 	    <% end %>
     </div>

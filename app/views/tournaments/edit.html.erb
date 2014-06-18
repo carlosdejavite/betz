@@ -1,0 +1,70 @@
+<div class="container">
+  <%= form_for @tournament do |form| %>
+   <div class="group">
+      <div class="groupTitle">World-Cup Finalists</div>
+      <span class="finalists">WINNER</span>
+      <%= form.collection_select(:winner_id, Team.find(:all), :id, :name, {:prompt => "Select a team"}) %>
+      <span class="finalists">RUNNER-UP</span>
+      <%= form.collection_select(:runnerup_id, Team.find(:all), :id, :name,{:prompt => "Select a team"}) %>
+      <%= form.submit "Update results", :class => "button finalistsButton" %>
+      <span class= <% if flash[:error] == true %> "error" <% else %> "success" <% end %> ><%= flash[:notice] %></span>
+    </div>
+    <%= form.fields_for :groups do |group_form| %>
+      <div class="group">
+          <div class="groupTitle"><%= group_form.object.name %><span id="collapsor<%= group_form.object.id %>" class="rightTeam not_collapsed" onclick="collapse(<%= group_form.object.id %>)"></span></div>
+          <div id="classification<%= group_form.object.id %>" class="classification groupClassification">
+              <table cellspacing="0">
+                  <thead>
+                    <tr>
+                      <td>Classification</td>
+                      <td title="Points">Pts</td>
+                      <td title="Matches played">MP</td>
+                      <td title="Victories">V</td>
+                      <td title="Draws">D</td>
+                      <td title="Goal difference">GD</td>
+                      <td title="Goals for">GF</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% group_form.object.classification().each_with_index do |rank,index| %>
+                      <tr>
+                        <td id="group[<%= group_form.object.id %>][<%= index %>]" class= <% if rank.classified %> "classified classificationName" <% else %> "notClassified classificationName" <%end%> ><%= index + 1 %>. <%= rank.team.name %></td>
+                        <td class="oddColumn mainInfo"><%= rank.points %></td>
+                        <td><%= rank.matches_played %></td>
+                        <td class="oddColumn"><%= rank.victories %></td>
+                        <td><%= rank.draws %></td>
+                        <td class= "oddColumn"><%= rank.goal_difference %></td>
+                        <td><%= rank.goal_for %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+              </table>
+          </div>
+          <div id="games<%= group_form.object.id %>" class="games">
+              <ul>                
+                  <%= group_form.fields_for :matches do |match_form| %>
+                    <li>
+                      <span class="time"><%= match_form.object.date_time.getlocal.strftime("%a %d %b %y %H:%M %p") %></span>
+                      <%= match_form.hidden_field :id %>
+                      <%= image_tag "#{@tournament.name}/#{match_form.object.team_a.flag_filename}", alt: "#{match_form.object.team_a.name}", :class => "leftTeam", id: "match[#{group_form.object.id}][#{match_form.object.id}]" %>
+                      <span class="leftTeam teamName"> <%= match_form.object.team_a.abbreviation %> </span>
+                      <%= match_form.text_field :score_a, :class => "leftTeam" %>
+                      <span class="middleX leftTeam">X</span>
+                      <%= image_tag "#{@tournament.name}/#{match_form.object.team_b.flag_filename}", :alt => "#{match_form.object.team_b.name}", :class => "rightTeam" %>
+                      <span class="rightTeam teamName"> <%= match_form.object.team_b.abbreviation %> </span>
+                      <%= match_form.text_field :score_b, :class => "rightTeam" %>
+                    </li>
+                  <% end %>
+              </ul>
+          </div>
+      </div>
+      <script>
+          classification<%= group_form.object.id %> = new Classification("<%= group_form.object.id %>");
+          var input;
+          <% group_form.object.matches.each do |match| %>
+            classification<%= group_form.object.id %>.addMatch("<%= match.id %>");
+          <% end %>
+      </script>          
+    <% end %>
+  <% end %>
+</div>

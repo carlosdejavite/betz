@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="group rankingGroup">
+        <div class="groupTitle"><%= @league.name %></div>
+        <div class="classification">
+            <table cellspacing="0">
+                <thead>
+                  <tr>
+                    <td>Ranking</td>
+                    <td title="Points">Points</td>
+                    <td title="Prize won">Prize</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @league.get_ranking(@league.id).each_with_index do |rank,index| %>
+                    <tr <% if rank.user.id == @current_user.id %> class = "selectedRanking" <% end %> >
+                      <td class="classificationName"><%= link_to "#{index + 1}. #{rank.user.name}", betting_pool_path(rank.betting_pool.id), :class => rank.prize > 0 ? "classified" : "notClassified" %></td>
+                      <td class="oddColumn mainInfo"><%= rank.points %></td>
+                      <td>$ <%= rank.prize.round(0) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>        
+</div>

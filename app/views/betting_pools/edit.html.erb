@@ -12,7 +12,7 @@
     <% @tournament.groups.each do |group| %>
       <div class="group">
           <div class="groupTitle"><%= group.name %><span id="collapsor<%= group.id %>" class="rightTeam not_collapsed" onclick="collapse(<%= group.id %>)"></span></div>
-          <div id="classification<%= group.id %>" class="classification">
+          <div id="classification<%= group.id %>" class="classification groupClassification">
               <table cellspacing="0">
                 <thead>
                     <tr>
@@ -28,7 +28,7 @@
                   <tbody>
                     <% group.classification(@betting_pool.id).each_with_index do |rank,index| %>
                       <tr>
-                        <td id="group[<%= group.id %>][<%= index %>]" class= <% if rank.classified %> "classified" <% else %> "notClassified" <%end%> ><%= index + 1 %>. <%= rank.team.name %></td>
+                        <td id="group[<%= group.id %>][<%= index %>]" class= <% if rank.classified %> "classified classificationName" <% else %> "notClassified classificationName" <%end%> ><%= index + 1 %>. <%= rank.team.name %></td>
                         <td class="oddColumn mainInfo"><%= rank.points %></td>
                         <td><%= rank.matches_played %></td>
                         <td class="oddColumn"><%= rank.victories %></td>
