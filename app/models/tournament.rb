@@ -25,7 +25,7 @@ class Tournament < ActiveRecord::Base
 				betting_pool.points_won_in_bet += team_in_finals_point
 			end
 
-			if betting_pool.runnerup == winner && betting_pool != nil
+			if betting_pool.runnerup == winner && betting_pool.runnerup != nil
 				betting_pool.points_won_in_bet += team_in_finals_point
 			end
 
