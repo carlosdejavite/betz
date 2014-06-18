@@ -17,7 +17,7 @@ class BettingPool < ActiveRecord::Base
 
 	def winner_different_from_runner_up
 	    errors.add(:runnerup, "must be different from winner") unless
-	        winner != runnerup
+	        winner != runnerup && winner != nil && runnerup != nil
 	end 
 	
 end
