@@ -41,9 +41,9 @@ class League < ActiveRecord::Base
 		@ranking.each_with_index do |rank, index|
 			if rank.points == @ranking[0].points && index != 0 then
 				first_prize_split += 1
-			elsif rank.points == @ranking[first_prize_split].points then
+			elsif rank.points == @ranking[first_prize_split].points && index != first_prize_split then
 				second_prize_split += 1
-			elsif rank.points == @ranking[second_prize_split + first_prize_split].points then
+			elsif rank.points == @ranking[second_prize_split + first_prize_split].points && index != (second_prize_split + first_prize_split) then
 				third_prize_split += 1
 			end
 		end
