@@ -5,9 +5,9 @@ class League < ActiveRecord::Base
 		@ranking = Array.new
 
 		betting_pool_size = 0
-		first_prize_split = 1
-		second_prize_split = 1
-		third_prize_split = 1
+		first_prize_split = 0
+		second_prize_split = 0
+		third_prize_split = 0
 
 		betting_pools = BettingPool.find(:all, :conditions => "league_id = " + league_id.to_s)
 
@@ -39,11 +39,11 @@ class League < ActiveRecord::Base
 		end
 
 		@ranking.each_with_index do |rank, index|
-			if rank.points == @ranking[0].points && index != 0 then
+			if rank.points == @ranking[0].points then
 				first_prize_split += 1
-			elsif rank.points == @ranking[first_prize_split].points && index != first_prize_split then
+			elsif rank.points == @ranking[first_prize_split].points then
 				second_prize_split += 1
-			elsif rank.points == @ranking[second_prize_split + first_prize_split].points && index != (second_prize_split + first_prize_split) then
+			elsif rank.points == @ranking[second_prize_split + first_prize_split].points then
 				third_prize_split += 1
 			end
 		end
