@@ -14,7 +14,7 @@
                   <% @league.get_ranking(@league.id).each_with_index do |rank,index| %>
                     <tr <% if rank.user.id == @current_user.id %> class = "selectedRanking" <% end %> >
                       <td class="classificationName"><%= link_to "#{index + 1}. #{rank.user.name}", betting_pool_path(rank.betting_pool.id), :class => rank.prize > 0 ? "classified" : "notClassified" %></td>
-                      <td class="oddColumn mainInfo"><%= rank.points %></td>
+                      <td class="oddColumn mainInfo"><%= number_with_delimiter(rank.points, :delimiter => ',') %></td>
                       <td>$ <%= rank.prize.round(0) %></td>
                     </tr>
                   <% end %>

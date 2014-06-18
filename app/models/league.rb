@@ -3,7 +3,12 @@ class League < ActiveRecord::Base
 
 	def get_ranking(league_id)
 		@ranking = Array.new
+
 		betting_pool_size = 0
+		first_prize_split = 1
+		second_prize_split = 1
+		third_prize_split = 1
+
 		betting_pools = BettingPool.find(:all, :conditions => "league_id = " + league_id.to_s)
 
 		betting_pools.each do |betting_pool|
@@ -34,19 +39,25 @@ class League < ActiveRecord::Base
 		end
 
 		@ranking.each_with_index do |rank, index|
+			if rank.points == @ranking[0].points then
+				first_prize_split += 1
+			elsif rank.points == @ranking[first_prize_split].points then
+				second_prize_split += 1
+			elsif rank.points == @ranking[second_prize_split + first_prize_split].points then
+				third_prize_split += 1
+			end
+		end
+
+		@ranking.each_with_index do |rank, index|
 
 			rank.prize = 0
 
-			if index == 0 then
-				rank.prize = first_place_prize*betting_pool_size
-			end
-
-			if index == 1 then
-				rank.prize = second_place_prize*betting_pool_size
-			end
-
-			if index == 2 then
-				rank.prize = third_place_prize*betting_pool_size
+			if index < first_prize_split then
+				rank.prize = first_place_prize*betting_pool_size/first_prize_split
+			elsif index < second_prize_split + first_prize_split then
+				rank.prize = second_place_prize*betting_pool_size/second_prize_split
+			elsif index < third_prize_split + second_prize_split + first_prize_split then
+				rank.prize = third_place_prize*betting_pool_size/third_prize_split
 			end
 
 		end
