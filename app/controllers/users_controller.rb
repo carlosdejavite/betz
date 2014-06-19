@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   #action to show login
   def login
-    if @current_user != nil then
+    if @current_user != nil && @betting_pool != nil then
       @betting_pool = BettingPool.find(session[:last_betting_pool_id])
       redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
     end
