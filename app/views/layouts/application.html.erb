@@ -10,7 +10,7 @@
 	<div class="overlay"></div>
     <div class="header">
         <a href="/"><%= image_tag("logo.png", :class => "logo", :alt => "Betz") %></a>
-        <% if @current_user != nil %>
+        <% if @current_user != nil && @betting_pool != nil %>
 	        <span class="login">Hi <%=@current_user.name %>,</span>
 	        <ul class="headerMenu">
 	            <li><%= link_to 'Logout', users_logout_path %></li>

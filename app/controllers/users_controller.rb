@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   #define home
   def index
-    if @current_user != nil then
+    if @current_user != nil && @betting_pool != nil then
       @betting_pool = BettingPool.find(session[:last_betting_pool_id])
       redirect_to :controller => 'betting_pools', :action => 'edit', :id => @betting_pool.id
     else
