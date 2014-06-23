@@ -27,7 +27,7 @@ class BettingPoolsController < ApplicationController
 
     params[:betting_pool][:bets_attributes].each do |key, array|
       bet = @bets.find_by(:match_id => array[:match_id].to_i())
-      if bet != nil then
+      if bet != nil && array[:score_b] != nil && array[:score_a] != nil then
         bet.score_a = array[:score_a].to_i()
         bet.score_b = array[:score_b].to_i()
         bet.save
