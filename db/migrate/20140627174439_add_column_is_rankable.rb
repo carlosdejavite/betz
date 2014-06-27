@@ -1,9 +1,7 @@
 class AddColumnIsRankable < ActiveRecord::Migration
   def change
-  	down
-
+  	remove_column :groups, :is_rankable, :boolean
   	add_column	:groups, :is_rankable, :boolean
-
   	Group.reset_column_information
 
   	#Change groups
@@ -42,9 +40,5 @@ class AddColumnIsRankable < ActiveRecord::Migration
 	round16 = Group.find_by(:name => "Round of 16")
 	round16.is_rankable = false
 	round16.save(:validate => false)
-  end
-
-  def down
-  	remove_column :groups, :is_rankable
   end
 end
