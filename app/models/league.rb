@@ -13,7 +13,7 @@ class League < ActiveRecord::Base
 
 		betting_pools.each do |betting_pool|
 			betting_pool_size += betting_pool.bet_amount
-			if betting_pool.user.name != nil then
+			if betting_pool.user.name != nil && betting_pool.bet_amount != 0 then
 				rank = LeagueRank.new
 				rank.user = betting_pool.user
 				rank.betting_pool = betting_pool

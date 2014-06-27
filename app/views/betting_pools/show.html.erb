@@ -10,6 +10,7 @@
     <div class="group">
         <div class="groupTitle"><%= group.name %><span id="collapsor<%= group.id %>" class="rightTeam not_collapsed" onclick="collapse(<%= group.id %>)"></span></div>
         <div id="classification<%= group.id %>" class="classification groupClassification">
+          <% if group.is_rankable %>
             <table cellspacing="0">
                 <thead>
                   <tr>
@@ -36,6 +37,7 @@
                   <% end %>
                 </tbody>
             </table>
+          <% end %>
         </div>
         <div id="games<%= group.id %>" class="games">
             <ul>
