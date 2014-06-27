@@ -75,7 +75,9 @@ class LoadRound16 < ActiveRecord::Migration
 
   def down
   	round16 = Group.find_by(:name => "Round of 16")
-  	Match.destroy_all(:group => round16)
-  	Group.destroy_all(:name => "Round of 16")
+  	if round16 != nil then
+  		Match.destroy_all(:group => round16)
+  		Group.destroy_all(:name => "Round of 16")
+  	end
   end
 end
