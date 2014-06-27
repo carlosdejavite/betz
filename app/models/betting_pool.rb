@@ -3,6 +3,7 @@ class BettingPool < ActiveRecord::Base
 	belongs_to 	:runnerup, :class_name => "Team"
 	belongs_to 	:user
 	belongs_to  :tournament
+	belongs_to	:league
 	has_many	:bets
 	validate	:winner_different_from_runner_up
 
@@ -16,7 +17,7 @@ class BettingPool < ActiveRecord::Base
 
 	def winner_different_from_runner_up
 	    errors.add(:runnerup, "must be different from winner") unless
-	        winner != runnerup
+	        winner != runnerup || (winner == nil && runnerup == nil)
 	end 
 	
 end

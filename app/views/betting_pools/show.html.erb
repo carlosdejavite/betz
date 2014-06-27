@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="group">
+    <div class="groupTitle">Bets of <%= @betting_pool.user.name %></div>
+    <span class="finalists">WINNER</span>
+    <span class="finalists finalistSelection"> <%= @betting_pool.winner != nil ? @betting_pool.winner.name : "NO BET" %> </span>
+    <span class="finalists">RUNNER-UP</span>
+    <span class="finalists finalistSelection"> <%= @betting_pool.runnerup != nil ? @betting_pool.runnerup.name : "NO BET" %> </span>
+  </div>
+  <% @tournament.groups.each do |group| %>
+    <div class="group">
+        <div class="groupTitle"><%= group.name %><span id="collapsor<%= group.id %>" class="rightTeam not_collapsed" onclick="collapse(<%= group.id %>)"></span></div>
+        <div id="classification<%= group.id %>" class="classification groupClassification">
+          <% if group.is_rankable %>
+            <table cellspacing="0">
+                <thead>
+                  <tr>
+                    <td>Classification</td>
+                    <td title="Points">Pts</td>
+                    <td title="Matches played">MP</td>
+                    <td title="Victories">V</td>
+                    <td title="Draws">D</td>
+                    <td title="Goal difference">GD</td>
+                    <td title="Goals for">GF</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% group.classification(@betting_pool.id).each_with_index do |rank,index| %>
+                    <tr>
+                      <td class= <% if rank.classified %> "classified classificationName" <% else %> "notClassified classificationName" <%end%> ><%= index + 1 %>. <%= rank.team.name %></td>
+                      <td class="oddColumn mainInfo"><%= rank.points %></td>
+                      <td><%= rank.matches_played %></td>
+                      <td class="oddColumn"><%= rank.victories %></td>
+                      <td><%= rank.draws %></td>
+                      <td class= "oddColumn"><%= rank.goal_difference %></td>
+                      <td><%= rank.goal_for %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+            </table>
+          <% end %>
+        </div>
+        <div id="games<%= group.id %>" class="games">
+            <ul>
+                <% group.matches.each do |match| %>
+                  <li>
+                    <span class="time"><%= match.date_time.getlocal.strftime("%a %d %b %y %H:%M %p") %></span>
+                    <%= image_tag "#{@tournament.name}/#{match.team_a.flag_filename}", alt: "#{match.team_a.name}", :class => "leftTeam" %>
+                    <span class="leftTeam teamName"> <%= match.team_a.abbreviation %> </span>
+                    <span class="leftTeam score"> <%= Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id) != nil ? Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id).score_a : "_" %> </span>
+                    <span class="middleX leftTeam">X</span>
+                    <%= image_tag "#{@tournament.name}/#{match.team_b.flag_filename}", :alt => "#{match.team_b.name}", :class => "rightTeam" %>
+                    <span class="rightTeam teamName"> <%= match.team_b.abbreviation %> </span>
+                    <span class="rightTeam score"> <%= Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id) != nil ? Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id).score_b : "_" %> </span>
+                  </li>
+                <% end %>
+            </ul>
+        </div>
+    </div>        
+  <% end %>
+</div>

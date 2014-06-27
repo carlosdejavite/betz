@@ -4,9 +4,9 @@ class CreateTournaments < ActiveRecord::Migration
     	t.string	:name
     	t.integer	:admin_tournament_id
     	t.integer	:winner_point
-        t.integer :runnerup_point
-      	t.integer :team_in_finals_point
-		t.timestamps
+      t.integer :runnerup_point
+      t.integer :team_in_finals_point
+		  t.timestamps
     end
   end
 end

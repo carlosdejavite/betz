@@ -323,6 +323,10 @@ ul{
 	margin-top: 9px;
 }
 
+.score{
+	padding-top: 7px;
+}
+
 .games li input{
 	padding: 5px;
     width: 15px;
@@ -393,14 +397,16 @@ thead td:first-child{
 .classified{
 	font-weight: bold;
 	color: green;
-	text-align: left;
 	padding-left: 2px;
 }
 .notClassified{
 	font-weight: bold;
 	color: #CCC;
-	text-align: left;
 	padding-left: 2px;
+}
+
+.classificationName{
+	text-align: left;
 }
 
 .mainInfo{
@@ -408,7 +414,35 @@ thead td:first-child{
 	font-weight: bold;
 }
 
-tbody tr:hover td{
+.groupClassification tbody tr:hover td{
 	background-color: #F3F3F3;
+	color: black;
+}
+
+/* Ranking */
+
+.selectedRanking {
+	background-color: #F3F3F3;
+}
+
+.selectedRanking td a{
+	color: black;
+}
+
+.rankingGroup {
+	width: 340px;
+}
+
+tbody tr td a{
+	text-decoration: none;
+}
+
+.rankingGroup tbody tr:hover td a{
+	color: #2989f4;
+	text-decoration: underline;
+}
+
+.finalistSelection{
+	padding-top: 10px;
 	color: black;
 }

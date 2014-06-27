@@ -60,7 +60,6 @@ Betz::Application.routes.draw do
   post 'users/post_login' => 'users#post_login'
   get 'users/logout' => 'users#logout'
 
-  resources :betting_pools
-  resources :users
+  resources :betting_pools, :users, :tournaments, :leagues
 
 end

@@ -1,6 +1,15 @@
 class BettingPoolsController < ApplicationController  
   before_action :require_login
 
+  def show
+
+    @title = "Bets"
+
+    @betting_pool = BettingPool.find(params[:id].to_i())
+    @tournament = @betting_pool.tournament
+
+  end
+
   #action to render new user form
   def edit
 
@@ -18,7 +27,7 @@ class BettingPoolsController < ApplicationController
 
     params[:betting_pool][:bets_attributes].each do |key, array|
       bet = @bets.find_by(:match_id => array[:match_id].to_i())
-      if bet != nil then
+      if bet != nil && array[:score_b] != nil && array[:score_a] != nil then
         bet.score_a = array[:score_a].to_i()
         bet.score_b = array[:score_b].to_i()
         bet.save
@@ -62,7 +71,7 @@ class BettingPoolsController < ApplicationController
     unless current_user != nil
     flash[:error] = true
     flash[:notice] = "You must be logged in to perform this action"
-    redirect_to :controller => 'users', :action => 'login', :controller => "users"
+    redirect_to :controller => 'users', :action => 'login'
     end
   end
 
