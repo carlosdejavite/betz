@@ -4,6 +4,14 @@ class Group < ActiveRecord::Base
 
 	accepts_nested_attributes_for :matches
 
+	def no_more_bets
+		no_more_bets = true
+		matches.each do |match|
+			no_more_bets = no_more_bets && !match.is_possible_bet_match
+		end
+		no_more_bets
+	end
+
 	def classification(betting_pool_id = nil)
 		@classification = Array.new
 

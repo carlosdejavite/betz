@@ -4,6 +4,12 @@ class Match < ActiveRecord::Base
 	belongs_to 	:team_b, :class_name => "Team"
 	has_many	:bets
 
+	def teams
+		@teams = Array.new
+		@teams << team_a
+		@teams << team_b
+	end
+
 	def is_possible_bet_match 
 		Time.now <= (self.date_time.getlocal.to_time - 3600).to_datetime
 	end

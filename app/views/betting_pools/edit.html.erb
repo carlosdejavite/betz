@@ -56,6 +56,12 @@
                       <%= image_tag "#{@tournament.name}/#{match.team_b.flag_filename}", :alt => "#{match.team_b.name}", :class => "rightTeam" %>
                       <span class="rightTeam teamName"> <%= match.team_b.abbreviation %> </span>
                       <%= bet_form.text_field :score_b, :class => "rightTeam", :disabled => !match.is_possible_bet_match %>
+                      <% if !group.is_rankable %>
+                        <div class="penalties">
+                          <span class="penaltiesLabel">Penalties results:<span>
+                          <%= bet_form.collection_select(:team_won_penalties_id, match.teams, :id, :name, {:prompt => "Select a team"}, {:disabled => !match.is_possible_bet_match}) %>
+                        </div>
+                      <% end %>
                     </li>
                   <% end %>
                 <% end %>
@@ -63,11 +69,12 @@
           </div>
       </div>
       <script>
+        <% if group.is_rankable %>
           classification<%= group.id %> = new Classification("<%= group.id %>");
-          var input;
           <% group.matches.each do |match| %>
             classification<%= group.id %>.addMatch("<%= match.id %>");
           <% end %>
+        <% end %>
       </script>          
     <% end %>
   <% end %>
