@@ -32,6 +32,12 @@ class TournamentsController < ApplicationController
             match.score_a = array_match[:score_a].to_i()
             match.score_b = array_match[:score_b].to_i()
 
+            if array_match[:team_won_penalties_id].blank? then
+              match.team_won_penalties_id = nil
+            else
+              match.team_won_penalties_id = array_match[:team_won_penalties_id].to_i()
+            end
+
             if !match.save then
               flash[:error] = true
               

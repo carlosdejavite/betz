@@ -2,6 +2,7 @@ class Match < ActiveRecord::Base
 	belongs_to 	:group
 	belongs_to 	:team_a, :class_name => "Team"
 	belongs_to 	:team_b, :class_name => "Team"
+	belongs_to 	:team_won_penalties, :class_name => "Team"
 	has_many	:bets
 
 	def teams
@@ -18,16 +19,51 @@ class Match < ActiveRecord::Base
 		bets.each do |bet|
 			bet.points_won_in_bet = 0
 
-			if bet.score_a > bet.score_b && score_a > score_b
-				bet.points_won_in_bet += group.point
-			end
+			if bet.team_won_penalties == nil then
 
-			if bet.score_a == bet.score_b && score_a == score_b
-				bet.points_won_in_bet += group.point
-			end
+				if team_won_penalties == nil then
 
-			if bet.score_a < bet.score_b && score_a < score_b
-				bet.points_won_in_bet += group.point
+					if bet.score_a > bet.score_b && score_a > score_b
+						bet.points_won_in_bet += group.point
+					end
+
+					if bet.score_a == bet.score_b && score_a == score_b
+						bet.points_won_in_bet += group.point
+					end
+
+					if bet.score_a < bet.score_b && score_a < score_b
+						bet.points_won_in_bet += group.point
+					end
+
+				else
+
+					if bet.score_a > bet.score_b && team_a == team_won_penalties
+						bet.points_won_in_bet += group.point
+					end
+
+					if bet.score_a < bet.score_b && team_b == team_won_penalties
+						bet.points_won_in_bet += group.point
+					end
+
+				end
+			else
+				if team_won_penalties == nil then
+
+					if score_a > score_b && team_a == bet.team_won_penalties
+						bet.points_won_in_bet += group.point
+					end
+
+					if score_a < score_b && team_b == bet.team_won_penalties
+						bet.points_won_in_bet += group.point
+					end
+
+				else
+
+					if bet.team_won_penalties == team_won_penalties
+						bet.points_won_in_bet += group.point
+					end
+
+				end
 			end
 
 			if bet.score_a == score_a && bet.score_b == score_b

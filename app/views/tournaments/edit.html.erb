@@ -1,6 +1,6 @@
 <div class="container">
   <%= form_for @tournament do |form| %>
-   <div class="group">
+    <div class="group">
       <div class="groupTitle">World-Cup Finalists</div>
       <span class="finalists">WINNER</span>
       <%= form.collection_select(:winner_id, Team.find(:all), :id, :name, {:prompt => "Select a team"}) %>
@@ -55,6 +55,13 @@
                       <%= image_tag "#{@tournament.name}/#{match_form.object.team_b.flag_filename}", :alt => "#{match_form.object.team_b.name}", :class => "rightTeam" %>
                       <span class="rightTeam teamName"> <%= match_form.object.team_b.abbreviation %> </span>
                       <%= match_form.text_field :score_b, :class => "rightTeam" %>
+                      <% if !group_form.object.is_rankable %>
+                        <div class="penalties">
+                          <span class="penaltiesLabel">Penalties result:
+                            <%= match_form.collection_select(:team_won_penalties_id, match_form.object.teams, :id, :name, {:prompt => "Select a team", :include_blank => "No penalties"}) %>
+                          </span>
+                        </div>
+                      <% end %>
                     </li>
                   <% end %>
               </ul>

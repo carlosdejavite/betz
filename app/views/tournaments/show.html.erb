@@ -53,6 +53,13 @@
                     <%= image_tag "#{@tournament.name}/#{match.team_b.flag_filename}", :alt => "#{match.team_b.name}", :class => "rightTeam" %>
                     <span class="rightTeam teamName"> <%= match.team_b.abbreviation %> </span>
                     <span class="rightTeam score"> <%= match.score_b != nil ? match.score_b : "_" %> </span>
+                    <% if !group.is_rankable %>
+                      <div class="penalties">
+                        <span class="penaltiesLabel">
+                          <%= match.team_won_penalties_id != nil ? "Penalties result: " + match.team_won_penalties.name : "" %>
+                        </span>
+                      </div>
+                    <% end %>
                   </li>
                 <% end %>
             </ul>

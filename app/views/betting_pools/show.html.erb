@@ -51,6 +51,13 @@
                     <%= image_tag "#{@tournament.name}/#{match.team_b.flag_filename}", :alt => "#{match.team_b.name}", :class => "rightTeam" %>
                     <span class="rightTeam teamName"> <%= match.team_b.abbreviation %> </span>
                     <span class="rightTeam score"> <%= Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id) != nil ? Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id).score_b : "_" %> </span>
+                    <% if !group.is_rankable %>
+                        <div class="penalties">
+                          <span class="penaltiesLabel">
+                            <%= Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id) != nil && Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id).team_won_penalties_id != nil ? "Penalties result: " + Team.find_by(:id => Bet.find_by(:match_id => match.id, :betting_pool_id => @betting_pool.id).team_won_penalties_id).name : "" %>
+                          </span>
+                        </div>
+                    <% end %>
                   </li>
                 <% end %>
             </ul>

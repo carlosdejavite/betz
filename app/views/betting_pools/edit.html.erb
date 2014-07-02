@@ -58,8 +58,9 @@
                       <%= bet_form.text_field :score_b, :class => "rightTeam", :disabled => !match.is_possible_bet_match %>
                       <% if !group.is_rankable %>
                         <div class="penalties">
-                          <span class="penaltiesLabel">Penalties result:<span>
-                          <%= bet_form.collection_select(:team_won_penalties_id, match.teams, :id, :name, {:prompt => "Select a team"}, {:disabled => !match.is_possible_bet_match}) %>
+                          <span class="penaltiesLabel">Penalties result:
+                            <%= bet_form.collection_select(:team_won_penalties_id, match.teams, :id, :name, {:prompt => "Select a team"}, {:disabled => !match.is_possible_bet_match}) %>
+                          </span>
                         </div>
                       <% end %>
                     </li>
