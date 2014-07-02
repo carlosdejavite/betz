@@ -2,7 +2,7 @@ class Tournament < ActiveRecord::Base
 	belongs_to	:admin_tournament, :class_name => "User"
 	belongs_to	:winner, :class_name => "Team"
 	belongs_to	:runnerup, :class_name => "Team"
-	has_many	:groups, :order => "is_rankable,id"
+	has_many	:groups, :order => "is_rankable, id DESC"
 	has_many	:betting_pools
 
 	accepts_nested_attributes_for :groups
