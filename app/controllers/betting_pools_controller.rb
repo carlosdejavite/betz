@@ -1,5 +1,6 @@
 class BettingPoolsController < ApplicationController  
   before_action :require_login
+  before_action :require_authorization, only: [:edit, :update]
 
   def show
 
@@ -100,6 +101,13 @@ class BettingPoolsController < ApplicationController
     flash[:error] = true
     flash[:notice] = "You must be logged in to perform this action"
     redirect_to :controller => 'users', :action => 'login'
+    end
+  end
+
+  #action that blocks access to change results if you are not the admin
+  def require_authorization
+    unless current_user.id == BettingPool.find(params[:id]).user.id
+      redirect_to :action => 'edit', :id => BettingPool.find_by(:user_id => current_user.id).id
     end
   end
 

@@ -5,7 +5,7 @@ class Bet < ActiveRecord::Base
 	validate	:penalties_fill_check
 
 	def penalties_fill_check
-	    errors.add(:team_won_penalties, "of match " + match.team_a.abbreviation + "vs" + match.team_b.abbreviation + " must be filled for") unless
+	    errors.add(:team_won_penalties, "of match " + match.team_a.abbreviation + "vs" + match.team_b.abbreviation + " must be filled") unless
 	        (score_a != score_b && team_won_penalties_id == nil) || (score_a == score_b && team_won_penalties_id != nil)
 	end
 
